@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"flamingo.me/flamingo/v3/core/form2/domain/mocks"
+	"flamingo.me/form/domain/mocks"
 )
 
 type (
@@ -59,19 +59,19 @@ func (t *MinimumAgeValidatorTestSuite) TestValidateField() {
 			Result: true,
 		},
 		{
-			Date:  child.Format("2006-01-02"),
+			Date:   child.Format("2006-01-02"),
 			Result: false,
 		},
 		{
-			Date:  almostAdult.Format("2006-01-02"),
+			Date:   almostAdult.Format("2006-01-02"),
 			Result: false,
 		},
 		{
-			Date:  justAdult.Format("2006-01-02"),
+			Date:   justAdult.Format("2006-01-02"),
 			Result: true,
 		},
 		{
-			Date:  adult.Format("2006-01-02"),
+			Date:   adult.Format("2006-01-02"),
 			Result: true,
 		},
 	}

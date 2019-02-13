@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"flamingo.me/flamingo/v3/core/form2/domain/mocks"
+	"flamingo.me/form/domain/mocks"
 )
 
 type (
@@ -39,7 +39,7 @@ func (t *MaximumAgeValidatorTestSuite) TestValidateField() {
 	now := time.Now()
 	child := time.Date(now.Year()-7, now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
 	adult := time.Date(now.Year()-40, now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
-	walkingDead := time.Date(now.Year()-150, now.Month(), now.Day() - 1, 0, 0, 0, 0, now.Location())
+	walkingDead := time.Date(now.Year()-150, now.Month(), now.Day()-1, 0, 0, 0, 0, now.Location())
 
 	testCases := []struct {
 		Date   string
@@ -58,19 +58,19 @@ func (t *MaximumAgeValidatorTestSuite) TestValidateField() {
 			Result: true,
 		},
 		{
-			Date:  child.Format("2006-01-02"),
+			Date:   child.Format("2006-01-02"),
 			Result: true,
 		},
 		{
-			Date:  adult.Format("2006-01-02"),
+			Date:   adult.Format("2006-01-02"),
 			Result: true,
 		},
 		{
-			Date:  walkingDead.Add(24 * time.Hour).Format("2006-01-02"),
+			Date:   walkingDead.Add(24 * time.Hour).Format("2006-01-02"),
 			Result: true,
 		},
 		{
-			Date:  walkingDead.Format("2006-01-02"),
+			Date:   walkingDead.Format("2006-01-02"),
 			Result: false,
 		},
 	}

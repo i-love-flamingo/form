@@ -7,13 +7,11 @@ import (
 	"net/url"
 	"testing"
 
-	"flamingo.me/flamingo/v3/core/form2/domain"
 	"flamingo.me/flamingo/v3/framework/flamingo"
-
-	"github.com/stretchr/testify/suite"
-
-	"flamingo.me/flamingo/v3/core/form2/domain/mocks"
 	"flamingo.me/flamingo/v3/framework/web"
+	"flamingo.me/form/domain"
+	"flamingo.me/form/domain/mocks"
+	"github.com/stretchr/testify/suite"
 )
 
 type (
@@ -79,7 +77,7 @@ func (t *FormHandlerImplTestSuite) SetupTest() {
 		logger:            t.logger,
 	}
 
-	t.request = web.RequestFromRequest(&http.Request{}, nil)
+	t.request = web.CreateRequest(&http.Request{}, nil)
 }
 
 func (t *FormHandlerImplTestSuite) TearDownTest() {

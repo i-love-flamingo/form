@@ -8,11 +8,11 @@ import (
 	"github.com/stretchr/testify/mock"
 
 	"github.com/stretchr/testify/suite"
-	"gopkg.in/go-playground/validator.v9"
+	validator "gopkg.in/go-playground/validator.v9"
 
-	"flamingo.me/flamingo/v3/core/form2/domain"
-	"flamingo.me/flamingo/v3/core/form2/domain/mocks"
 	"flamingo.me/flamingo/v3/framework/web"
+	"flamingo.me/form/domain"
+	"flamingo.me/form/domain/mocks"
 )
 
 type (
@@ -138,7 +138,7 @@ func (t *ValidatorProviderTestSuite) TestGetRelativeFieldNameFromValidationError
 func (t *ValidatorProviderTestSuite) TestValidate() {
 	ctx := context.Background()
 	request := &web.Request{}
-	reqCtx := web.Context_(ctx, request)
+	reqCtx := web.ContextWithRequest(ctx, request)
 
 	t.firstFieldValidator.On("ValidateField", reqCtx, mock.Anything).Return(false).Once()
 	t.secondFieldValidator.On("ValidateField", reqCtx, mock.Anything).Return(true).Once()

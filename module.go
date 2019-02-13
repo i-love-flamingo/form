@@ -1,12 +1,12 @@
 package form
 
 import (
-	"flamingo.me/flamingo/v3/core/form2/application"
-	"flamingo.me/flamingo/v3/core/form2/domain"
-	"flamingo.me/flamingo/v3/core/form2/domain/formData"
-	"flamingo.me/flamingo/v3/core/form2/domain/validators"
+	"flamingo.me/dingo"
 	"flamingo.me/flamingo/v3/framework/config"
-	"flamingo.me/flamingo/v3/framework/dingo"
+	"flamingo.me/form/application"
+	"flamingo.me/form/domain"
+	"flamingo.me/form/domain/formdata"
+	"flamingo.me/form/domain/validators"
 )
 
 type (

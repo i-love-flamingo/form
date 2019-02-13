@@ -4,10 +4,10 @@ import (
 	"context"
 	"strings"
 
-	"gopkg.in/go-playground/validator.v9"
+	validator "gopkg.in/go-playground/validator.v9"
 
-	"flamingo.me/flamingo/v3/core/form2/domain"
 	"flamingo.me/flamingo/v3/framework/web"
+	"flamingo.me/form/domain"
 )
 
 type (
@@ -29,7 +29,7 @@ func (p *ValidatorProviderImpl) Inject(fieldValidators []domain.FieldValidator, 
 
 // Validate method which validates any struct and returns domain.ValidationInfo as a result of validation
 func (p *ValidatorProviderImpl) Validate(ctx context.Context, req *web.Request, value interface{}) domain.ValidationInfo {
-	reqCtx := web.Context_(ctx, req)
+	reqCtx := web.ContextWithRequest(ctx, req)
 	validate := p.GetValidator()
 	err := validate.StructCtx(reqCtx, value)
 

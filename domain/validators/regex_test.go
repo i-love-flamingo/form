@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"flamingo.me/flamingo/v3/core/form2/domain/mocks"
+	"flamingo.me/form/domain/mocks"
 )
 
 type (
@@ -31,7 +31,7 @@ func (t *RegexValidatorTestSuite) TestValidatorName() {
 
 func (t *RegexValidatorTestSuite) TestValidateField() {
 	testCases := []struct {
-		Value   string
+		Value  string
 		Result bool
 	}{
 		{

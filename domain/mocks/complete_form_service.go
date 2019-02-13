@@ -3,7 +3,7 @@
 package mocks
 
 import context "context"
-import domain "flamingo.me/flamingo/v3/core/form2/domain"
+import domain "flamingo.me/form/domain"
 import mock "github.com/stretchr/testify/mock"
 import url "net/url"
 import web "flamingo.me/flamingo/v3/framework/web"

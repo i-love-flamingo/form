@@ -3,8 +3,8 @@ package formdata
 import (
 	"context"
 
-	"flamingo.me/flamingo/v3/core/form2/domain"
 	"flamingo.me/flamingo/v3/framework/web"
+	"flamingo.me/form/domain"
 )
 
 type (

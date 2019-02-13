@@ -6,9 +6,9 @@ import (
 	"strings"
 	"time"
 
-	"flamingo.me/flamingo/v3/core/form2/domain"
+	"flamingo.me/form/domain"
 
-	"gopkg.in/go-playground/validator.v9"
+	validator "gopkg.in/go-playground/validator.v9"
 )
 
 type (

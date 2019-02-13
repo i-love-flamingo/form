@@ -1,9 +1,9 @@
 package fake
 
 import (
-	"flamingo.me/flamingo/v3/core/form2/application"
-	"flamingo.me/flamingo/v3/core/form2/domain"
-	"flamingo.me/flamingo/v3/core/form2/domain/mocks"
+	"flamingo.me/form/application"
+	"flamingo.me/form/domain"
+	"flamingo.me/form/domain/mocks"
 )
 
 type (
