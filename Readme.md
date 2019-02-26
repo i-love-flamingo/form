@@ -118,7 +118,11 @@ Final part is to use this new AddressFormDataProvider during creation of domain.
     // some code
     
     formHandler := c.formHandlerFactory.CreateFormHandlerWithFormService(c.addressFormDataProvider)
-    
+    form, err := formHandler.HandleSubmittedForm(ctx,r)
+    if err != nil {
+       //error handling
+    }
+    addressFormData, ok := form.Data.(dto.AddressFormData)
     // some code
   }  
 
@@ -156,7 +160,7 @@ It's also possible to use FormBuilder instance for more specific domain.FormHand
   func (c *MyController) Get(ctx context.Context, req *web.Request) web.Response {
     // some code
     
-    formHandler := c.formHandlerFactory.GetBuilder().
+    formHandler := c.formHandlerFactory.GetFormHandlerBuilder().
       SetFormDataProvider(c.addressFormDataProvider).
       SetFormDataValidator(c.addressFormDataValidator).
       Build()
@@ -169,8 +173,9 @@ It's also possible to use FormBuilder instance for more specific domain.FormHand
 ### Custom Form Data decoding
 
 Default domain.FormDataDecoder provides http request body decoding provided by "github.com/go-playground/form"
-and string processing provided by "github.com/leebenson/conform". To provide custom form data provider, simply
-define new form service type:
+and string processing provided by "github.com/leebenson/conform".
+If you dont want to use it, you can provide custom form data decoder by simply
+implementing the correct interface:
 
 ```go
   type (

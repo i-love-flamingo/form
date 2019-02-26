@@ -122,6 +122,19 @@ func (vi *ValidationInfo) GetErrorsForField(fieldName string) []Error {
 	return vi.fieldErrors[fieldName]
 }
 
+//GetValidationSummary - returns a string with all validation messages - useful for logging or other summarized needs
+func (vi *ValidationInfo) GetValidationSummary() string {
+	result := "invalid form: "
+	for k,errors := range vi.GetErrorsForAllFields() {
+		result = result + " / " + k
+		for _,error := range errors {
+			result = result + error.MessageKey
+		}
+	}
+	return result
+}
+
+
 // getExistingMessageKeys method which returns all message keys used in specific list of validation errors
 func (vi *ValidationInfo) getExistingMessageKeys(errs []Error) map[string]bool {
 	keys := make(map[string]bool, len(errs))
@@ -130,3 +143,5 @@ func (vi *ValidationInfo) getExistingMessageKeys(errs []Error) map[string]bool {
 	}
 	return keys
 }
+
+
