@@ -1,5 +1,7 @@
 package domain
 
+import "encoding/json"
+
 type (
 	// ValidationInfo - represents the complete Validation Informations of your form. It can contain GeneralErrors and form field related errors.
 	ValidationInfo struct {
@@ -7,6 +9,12 @@ type (
 		fieldErrors map[string][]Error
 		// generalErrors list of general form errors, that are not related to any field
 		generalErrors []Error
+	}
+
+	validationInfoEnodeAble struct {
+		FieldErrors   map[string][]Error
+		GeneralErrors []Error
+		IsValid       bool
 	}
 
 	// ValidationRule - contains single validation rule for field. Name is mandatory (required|email|max|len|...), Value is optional and adds additional info (like "128" for "max=128" rule)
@@ -125,15 +133,14 @@ func (vi *ValidationInfo) GetErrorsForField(fieldName string) []Error {
 //GetValidationSummary - returns a string with all validation messages - useful for logging or other summarized needs
 func (vi *ValidationInfo) GetValidationSummary() string {
 	result := "invalid form: "
-	for k,errors := range vi.GetErrorsForAllFields() {
+	for k, errors := range vi.GetErrorsForAllFields() {
 		result = result + " / " + k
-		for _,error := range errors {
+		for _, error := range errors {
 			result = result + error.MessageKey
 		}
 	}
 	return result
 }
-
 
 // getExistingMessageKeys method which returns all message keys used in specific list of validation errors
 func (vi *ValidationInfo) getExistingMessageKeys(errs []Error) map[string]bool {
@@ -144,4 +151,12 @@ func (vi *ValidationInfo) getExistingMessageKeys(errs []Error) map[string]bool {
 	return keys
 }
 
-
+// MarshalJSON - implements MarshalJson interface - so that we can use response
+func (vi ValidationInfo) MarshalJSON() ([]byte, error) {
+	validationInfoEnodeAble := validationInfoEnodeAble{
+		FieldErrors:   vi.fieldErrors,
+		GeneralErrors: vi.generalErrors,
+		IsValid:       vi.IsValid(),
+	}
+	return json.Marshal(&validationInfoEnodeAble)
+}

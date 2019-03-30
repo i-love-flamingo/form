@@ -14,8 +14,8 @@ http request body.
   import (
     "context"
   
-    "flamingo.me/flamingo/core/form2/application"
-    "flamingo.me/flamingo/framework/web"
+    "flamingo.me/form/application"
+    "flamingo.me/flamingo/v3/framework/web"
   )
   
   type MyController struct {
@@ -23,7 +23,7 @@ http request body.
   }
   
   func (c *MyController) Inject(f application.FormHandlerFactory) {
-    .formHandlerFactory = f
+    c.formHandlerFactory = f
   }
   
   func (c *MyController) Get(ctx context.Context, req *web.Request) web.Response {
@@ -273,8 +273,8 @@ Those kind of services should be injected via dingo injector, by using method "B
   }
 ```
 
-Finally, provider can be defined for instance domain.FormHandler by using FormHandlerBuilder, with the same key
-provided in "BindMap" method:
+Finally, the registered provider can be used in an instance of domain.FormHandler by using FormHandlerBuilder, with the same key
+provided in "BindMap" method like this:
 
 ```go
   func (c *MyController) Second(ctx context.Context, req *web.Request) web.Response {

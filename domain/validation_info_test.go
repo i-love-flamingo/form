@@ -1,7 +1,10 @@
 package domain
 
 import (
+	"encoding/json"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 
 	"github.com/stretchr/testify/suite"
 )
@@ -301,4 +304,11 @@ func (t *ValidationInfoTestSuite) TestAppendFieldErrors() {
 			},
 		},
 	}, t.validationInfo.GetErrorsForAllFields())
+}
+
+func (t *ValidationInfoTestSuite) TestMarshalJson() {
+	t.validationInfo.AddFieldError("key", "error", "error")
+	jsonString, _ := json.Marshal(t.validationInfo)
+	assert.Contains(t.T(), string(jsonString), "key")
+
 }
