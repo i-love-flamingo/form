@@ -100,6 +100,11 @@ func (vi *ValidationInfo) AppendFieldErrors(fieldErrors map[string][]Error) {
 	}
 }
 
+// RemoveAllFieldError method which removes field errors again
+func (vi *ValidationInfo) RemoveAllFieldError(fieldName string) {
+	vi.fieldErrors[fieldName] = nil
+}
+
 // AddFieldError method which adds a field error with the passed field name, message key and default label
 func (vi *ValidationInfo) AddFieldError(fieldName string, messageKey string, defaultLabel string) {
 	if vi.fieldErrors == nil {
