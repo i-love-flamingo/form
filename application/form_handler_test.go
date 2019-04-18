@@ -234,7 +234,7 @@ func (t *FormHandlerImplTestSuite) TestExtractValidationRules_Struct() {
 func (t *FormHandlerImplTestSuite) TestGetUrlValues_PostError() {
 	t.request.Request().Method = http.MethodPost
 
-	values, err := t.handler.getUrlValues(t.request, http.MethodPost)
+	values, err := t.handler.getURLValues(t.request, http.MethodPost)
 	t.Error(err)
 	t.Nil(values)
 }
@@ -246,7 +246,7 @@ func (t *FormHandlerImplTestSuite) TestGetUrlValues_PostSuccess() {
 		"second": []string{"second"},
 	}
 
-	values, err := t.handler.getUrlValues(t.request, http.MethodPost)
+	values, err := t.handler.getURLValues(t.request, http.MethodPost)
 	t.NoError(err)
 	t.Equal(&url.Values{
 		"first":  []string{"first"},
@@ -263,7 +263,7 @@ func (t *FormHandlerImplTestSuite) TestGetUrlValues_GetSuccess() {
 		}.Encode(),
 	}
 
-	values, err := t.handler.getUrlValues(t.request, http.MethodGet)
+	values, err := t.handler.getURLValues(t.request, http.MethodGet)
 	t.NoError(err)
 	t.Equal(&url.Values{
 		"first":  []string{"first"},
