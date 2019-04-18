@@ -98,7 +98,7 @@ func (h *formHandlerImpl) buildForm(ctx context.Context, req *web.Request, submi
 
 // handleSubmittedForm as method for processing
 func (h *formHandlerImpl) handleSubmittedForm(ctx context.Context, req *web.Request, form *domain.Form, method string) (*domain.Form, error) {
-	values, err := h.getUrlValues(req, method)
+	values, err := h.getURLValues(req, method)
 	if err != nil {
 		h.getLogger("postValueProcessing").Error(err.Error())
 		return nil, domain.NewFormError(err.Error())
@@ -201,7 +201,7 @@ func (h *formHandlerImpl) extractValidationRules(formData interface{}) map[strin
 }
 
 // getPostValues as method for extracting http request body
-func (h *formHandlerImpl) getUrlValues(r *web.Request, method string) (*url.Values, error) {
+func (h *formHandlerImpl) getURLValues(r *web.Request, method string) (*url.Values, error) {
 	if method == http.MethodGet {
 		values := r.Request().URL.Query()
 		return &values, nil
