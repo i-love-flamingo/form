@@ -133,6 +133,11 @@ func (t *FormHandlerImplTestSuite) TestExtractValidationRules_NotStruct() {
 
 func (t *FormHandlerImplTestSuite) TestExtractValidationRules_Struct() {
 	t.Equal(map[string][]domain.ValidationRule{
+		"zero": {
+			{
+				Name: "required",
+			},
+		},
 		"first": {
 			{
 				Name: "required",
@@ -155,6 +160,11 @@ func (t *FormHandlerImplTestSuite) TestExtractValidationRules_Struct() {
 			{
 				Name:  "gte",
 				Value: "10",
+			},
+		},
+		"Seventh": {
+			{
+				Name: "required",
 			},
 		},
 		"subStruct.first": {
@@ -205,13 +215,63 @@ func (t *FormHandlerImplTestSuite) TestExtractValidationRules_Struct() {
 				Value: "10",
 			},
 		},
+		"referenceStruct.first": {
+			{
+				Name: "required",
+			},
+			{
+				Name:  "gte",
+				Value: "10",
+			},
+		},
+		"referenceStruct.second": {
+			{
+				Name:  "gte",
+				Value: "10",
+			},
+		},
+		"referenceStruct.Sixth": {
+			{
+				Name: "required",
+			},
+			{
+				Name:  "gte",
+				Value: "10",
+			},
+		},
+		"ReferenceWithoutName.first": {
+			{
+				Name: "required",
+			},
+			{
+				Name:  "gte",
+				Value: "10",
+			},
+		},
+		"ReferenceWithoutName.second": {
+			{
+				Name:  "gte",
+				Value: "10",
+			},
+		},
+		"ReferenceWithoutName.Sixth": {
+			{
+				Name: "required",
+			},
+			{
+				Name:  "gte",
+				Value: "10",
+			},
+		},
 	}, t.handler.extractValidationRules(struct {
-		First          string `form:"first" validate:"required,gte=10"`
-		Second         string `form:"second" validate:"omitempty,gte=10"`
-		Third          string `form:"-" validate:"required,gte=10"`
-		Fourth         string `form:"fourth" validate:""`
-		Fifth          string `form:"fifth"`
-		Sixth          string `validate:"required,gte=10"`
+		Zero           interface{} `form:"zero" validate:"required"`
+		First          string      `form:"first" validate:"required,gte=10"`
+		Second         string      `form:"second" validate:"omitempty,gte=10"`
+		Third          string      `form:"-" validate:"required,gte=10"`
+		Fourth         string      `form:"fourth" validate:""`
+		Fifth          string      `form:"fifth"`
+		Sixth          string      `validate:"required,gte=10"`
+		Seventh        *string     `validate:"required"`
 		StructWithName struct {
 			First  string `form:"first" validate:"required,gte=10"`
 			Second string `form:"second" validate:"omitempty,gte=10"`
@@ -221,6 +281,22 @@ func (t *FormHandlerImplTestSuite) TestExtractValidationRules_Struct() {
 			Sixth  string `validate:"required,gte=10"`
 		} `form:"subStruct"`
 		StructWithoutName struct {
+			First  string `form:"first" validate:"required,gte=10"`
+			Second string `form:"second" validate:"omitempty,gte=10"`
+			Third  string `form:"-" validate:"required,gte=10"`
+			Fourth string `form:"fourth" validate:""`
+			Fifth  string `form:"fifth"`
+			Sixth  string `validate:"required,gte=10"`
+		}
+		ReferenceWithName *struct {
+			First  string `form:"first" validate:"required,gte=10"`
+			Second string `form:"second" validate:"omitempty,gte=10"`
+			Third  string `form:"-" validate:"required,gte=10"`
+			Fourth string `form:"fourth" validate:""`
+			Fifth  string `form:"fifth"`
+			Sixth  string `validate:"required,gte=10"`
+		} `form:"referenceStruct"`
+		ReferenceWithoutName *struct {
 			First  string `form:"first" validate:"required,gte=10"`
 			Second string `form:"second" validate:"omitempty,gte=10"`
 			Third  string `form:"-" validate:"required,gte=10"`
