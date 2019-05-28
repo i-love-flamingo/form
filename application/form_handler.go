@@ -146,11 +146,11 @@ func (h *formHandlerImpl) extractValidationRules(formData interface{}) map[strin
 
 	for i := 0; i < typeOf.NumField(); i++ {
 		fieldValue := valueOf.Field(i)
-		fieldType := typeOf.Field(i)
-
-		if fieldValue.Kind() == reflect.Ptr {
-			fieldValue = fieldValue.Elem()
+		if fieldValue.Type().Kind() == reflect.Ptr && fieldValue.Type().Elem().Kind() == reflect.Struct {
+			fieldValue = reflect.Zero(fieldValue.Type().Elem())
 		}
+
+		fieldType := typeOf.Field(i)
 
 		name := fieldType.Tag.Get("form")
 		if name == "-" {
