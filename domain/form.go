@@ -74,6 +74,11 @@ func (f Form) GetValidationRulesForField(name string) []ValidationRule {
 	return f.validationRules[name]
 }
 
+// GetValidationRules returns all available validation rules
+func (f Form) GetValidationRules() map[string][]ValidationRule {
+	return f.validationRules
+}
+
 // NewFormError returns new instance of error interface by defining string content of error
 func NewFormError(details string) FormError {
 	return FormError(details)
