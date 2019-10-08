@@ -68,4 +68,16 @@ type (
 		FormDataDecoder
 		FormDataValidator
 	}
+
+	// FormDataEncoder is interface for defining all form services which encode (previously decoded) formdata into urlValues
+	FormDataEncoder interface {
+		// Encode as method for transforming http request body into form data
+		Encode(ctx context.Context, formData interface{}) (url.Values, error)
+	}
+
+	// DefaultFormDataEncoder is interface for defining default form data encoder
+	// used in case when there is no custom form data encoder defined
+	DefaultFormDataEncoder interface {
+		FormDataEncoder
+	}
 )

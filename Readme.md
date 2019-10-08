@@ -507,3 +507,16 @@ func TestMyValidator_ValidateField(t *testing) {
   // some code
 }
 ```
+
+
+## FormData Encoding
+
+In some use cases you might want to encode a (previously decoded) formData interface back to corresponding url.Values.
+
+You can use the `FormDataEncoderFactory` for this to get the correct encoder.
+
+Example:
+
+```go
+    urlValues, err := r.formDataEncoderFactory.CreateByNamedEncoder("commerce.cart.billingFormService").Encode(ctx,address)
+```
