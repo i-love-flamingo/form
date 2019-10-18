@@ -36,10 +36,20 @@ func (t *DefaultFormDataValidatorImplTestSuite) TearDownTest() {
 	t.validatorProvider = nil
 }
 
-func (t *DefaultFormDataValidatorImplTestSuite) TestGetFormData() {
-	t.validatorProvider.On("Validate", nil, (*web.Request)(nil), "something").Return(domain.ValidationInfo{}).Once()
+func (t *DefaultFormDataValidatorImplTestSuite) TestGetFormData_Struct() {
+	object := struct {}{}
+	t.validatorProvider.On("Validate", nil, (*web.Request)(nil), object).Return(domain.ValidationInfo{}).Once()
 
-	result, err := t.validator.Validate(nil, nil, t.validatorProvider, "something")
+	result, err := t.validator.Validate(nil, nil, t.validatorProvider, object)
+
+	t.NoError(err)
+	t.Equal(&domain.ValidationInfo{}, result)
+}
+
+func (t *DefaultFormDataValidatorImplTestSuite) TestGetFormData_Map() {
+	object := map[string]string{}
+
+	result, err := t.validator.Validate(nil, nil, t.validatorProvider, object)
 
 	t.NoError(err)
 	t.Equal(&domain.ValidationInfo{}, result)
