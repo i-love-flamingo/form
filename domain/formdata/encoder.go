@@ -17,7 +17,7 @@ type (
 
 var _ domain.DefaultFormDataEncoder = &DefaultFormDataEncoderImpl{}
 
-// Decode performs default form data decoding, depending if passed form data is instance of map[string]string or any other interface.
+// Encode performs default form data encoding, depending if passed form data is instance of map[string]string or any other interface.
 func (p *DefaultFormDataEncoderImpl) Encode(_ context.Context, formData interface{}) (url.Values, error) {
 	if data, ok := formData.(map[string]string); ok {
 		urlValues := make(url.Values)
