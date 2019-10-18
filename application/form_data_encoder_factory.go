@@ -3,7 +3,7 @@ package application
 import "flamingo.me/form/domain"
 
 type (
-	// FormEncoderFactory as interface for simple creation of form encoder instance
+	// FormDataEncoderFactory as interface for simple creation of form encoder instance
 	FormDataEncoderFactory interface {
 		CreateWithFormService(formService domain.FormService) domain.FormDataEncoder
 		CreateByNamedEncoder(name string) domain.FormDataEncoder
