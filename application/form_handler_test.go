@@ -3,6 +3,7 @@ package application
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"net/url"
 	"testing"
@@ -97,29 +98,63 @@ func (t *FormHandlerImplTestSuite) TearDownTest() {
 func (t *FormHandlerImplTestSuite) TestHandleUnsubmittedForm_Error() {
 	t.provider.On("GetFormData", t.context, t.request).Return(nil, errors.New("error")).Once()
 
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
+
 	result, err := t.handler.HandleUnsubmittedForm(t.context, t.request)
 	t.Equal(domain.FormError("error"), err)
 	t.Nil(result)
 }
 
 func (t *FormHandlerImplTestSuite) TestHandleUnsubmittedForm_Success() {
-	t.provider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.provider.On("GetFormData", t.context, t.request).Return(struct {
+		FirstField string `form:"firstField" validate:"required"`
+	}{}, nil).Once()
 
-	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
-	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
-	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(struct {
+		SecondField string `form:"secondField" validate:"required"`
+	}{}, nil).Twice()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(struct {
+		ThirdField string `form:"thirdField" validate:"required"`
+	}{}, nil).Twice()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Times(4)
 
 	result, err := t.handler.HandleUnsubmittedForm(t.context, t.request)
 	t.NoError(err)
 
-	form := domain.NewForm(false, map[string][]domain.ValidationRule{})
-	form.Data = map[string]int{}
+	form := domain.NewForm(false, map[string][]domain.ValidationRule{
+		"firstField": {
+			{
+				Name: "required",
+			},
+		},
+		"secondField": {
+			{
+				Name: "required",
+			},
+		},
+		"thirdField": {
+			{
+				Name: "required",
+			},
+		},
+	})
+	form.Data = struct {
+		FirstField string `form:"firstField" validate:"required"`
+	}{}
 	form.FormExtensionsData = map[string]interface{}{
-		"first":  map[string]int{},
-		"second": map[string]int{},
+		"first": struct {
+			SecondField string `form:"secondField" validate:"required"`
+		}{},
+		"second": struct {
+			ThirdField string `form:"thirdField" validate:"required"`
+		}{},
 		"third":  map[string]int{},
 		"fourth": map[string]int{},
 	}
+
+	fmt.Println(result.GetValidationRules())
 
 	t.Equal(&form, result)
 }
@@ -406,6 +441,10 @@ func (t *FormHandlerImplTestSuite) TestProcessExtension_ValidatorSuccess() {
 func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_GetFormDataError() {
 	t.provider.On("GetFormData", t.context, t.request).Return(nil, errors.New("error")).Once()
 
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
+
 	result, err := t.handler.HandleSubmittedForm(t.context, t.request)
 	t.Equal(domain.FormError("error"), err)
 	t.Nil(result)
@@ -413,6 +452,10 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_GetFormDataError() {
 
 func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_PostValueProcessingError() {
 	t.provider.On("GetFormData", t.context, t.request).Return(map[string]string{}, nil).Once()
+
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 
 	t.request.Request().Method = http.MethodPost
 
@@ -423,6 +466,10 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_PostValueProcessingEr
 
 func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_DecodeError() {
 	t.provider.On("GetFormData", t.context, t.request).Return(map[string]string{}, nil).Once()
+
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 
 	t.request.Request().Method = http.MethodPost
 	t.request.Request().PostForm = url.Values{
@@ -442,6 +489,10 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_DecodeError() {
 
 func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_ValidateError() {
 	t.provider.On("GetFormData", t.context, t.request).Return(map[string]string{}, nil).Once()
+
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 
 	t.request.Request().Method = http.MethodPost
 	t.request.Request().PostForm = url.Values{
@@ -468,26 +519,11 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_ValidateError() {
 }
 
 func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_FormExtensionError() {
-	t.provider.On("GetFormData", t.context, t.request).Return(map[string]string{}, nil).Once()
-
 	t.request.Request().Method = http.MethodPost
 	t.request.Request().PostForm = url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}
-
-	t.decoder.On("Decode", t.context, t.request, url.Values{
-		"first":  []string{"first"},
-		"second": []string{"second"},
-	}, map[string]string{}).Return(map[string]string{
-		"first":  "first",
-		"second": "second",
-	}, nil).Once()
-
-	t.validator.On("Validate", t.context, t.request, t.validatorProvider, map[string]string{
-		"first":  "first",
-		"second": "second",
-	}).Return(&domain.ValidationInfo{}, nil).Once()
 
 	t.firstExtension.On("GetFormData", t.context, t.request).Return(nil, errors.New("error")).Maybe()
 	t.secondExtension.On("GetFormData", t.context, t.request).Return(nil, errors.New("error")).Maybe()
@@ -520,28 +556,28 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_Success() {
 		"second": "second",
 	}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.firstExtension.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}, map[string]int{}).Return(map[string]int{}, nil).Once()
 	t.firstExtension.On("Validate", t.context, t.request, t.validatorProvider, map[string]int{}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.defaultDecoder.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}, map[string]int{}).Return(map[string]int{}, nil).Once()
 	t.defaultValidator.On("Validate", t.context, t.request, t.validatorProvider, map[string]int{}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.thirdExtension.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}, map[string]int{}).Return(map[string]int{}, nil).Once()
 	t.defaultValidator.On("Validate", t.context, t.request, t.validatorProvider, map[string]int{}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.defaultDecoder.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
@@ -569,9 +605,9 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_Success() {
 func (t *FormHandlerImplTestSuite) TestHandleForm_Unsubmitted() {
 	t.provider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
 
-	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
-	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
-	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Times(4)
 
 	result, err := t.handler.HandleUnsubmittedForm(t.context, t.request)
 	t.NoError(err)
@@ -610,28 +646,28 @@ func (t *FormHandlerImplTestSuite) TestHandleForm_Submitted() {
 		"second": "second",
 	}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.firstExtension.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}, map[string]int{}).Return(map[string]int{}, nil).Once()
 	t.firstExtension.On("Validate", t.context, t.request, t.validatorProvider, map[string]int{}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.defaultDecoder.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}, map[string]int{}).Return(map[string]int{}, nil).Once()
 	t.defaultValidator.On("Validate", t.context, t.request, t.validatorProvider, map[string]int{}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.thirdExtension.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}, map[string]int{}).Return(map[string]int{}, nil).Once()
 	t.defaultValidator.On("Validate", t.context, t.request, t.validatorProvider, map[string]int{}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.defaultDecoder.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
@@ -680,28 +716,28 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedGETForm() {
 		"second": "second",
 	}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.firstExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.firstExtension.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}, map[string]int{}).Return(map[string]int{}, nil).Once()
 	t.firstExtension.On("Validate", t.context, t.request, t.validatorProvider, map[string]int{}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.secondExtension.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.defaultDecoder.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}, map[string]int{}).Return(map[string]int{}, nil).Once()
 	t.defaultValidator.On("Validate", t.context, t.request, t.validatorProvider, map[string]int{}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.thirdExtension.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},
 	}, map[string]int{}).Return(map[string]int{}, nil).Once()
 	t.defaultValidator.On("Validate", t.context, t.request, t.validatorProvider, map[string]int{}).Return(&domain.ValidationInfo{}, nil).Once()
 
-	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Once()
+	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 	t.defaultDecoder.On("Decode", t.context, t.request, url.Values{
 		"first":  []string{"first"},
 		"second": []string{"second"},

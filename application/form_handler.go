@@ -84,13 +84,31 @@ func (h *formHandlerImpl) HandleSubmittedGETForm(ctx context.Context, req *web.R
 
 // buildForm as method for creating new instance of Form domain
 func (h *formHandlerImpl) buildForm(ctx context.Context, req *web.Request, submitted bool) (*domain.Form, error) {
+	validationRules := map[string][]domain.ValidationRule{}
+	for _, formExtension := range h.formExtensions {
+		var formDataProvider domain.FormDataProvider
+		if provider, ok := formExtension.(domain.FormDataProvider); ok {
+			formDataProvider = provider
+		}
+		extensionFormData, err := h.getFormData(ctx, req, formDataProvider)
+		if err != nil {
+			h.getLogger("formExtensions").Error(err.Error())
+			return nil, domain.NewFormError(err.Error())
+		}
+		extensionValidationRules := h.extractValidationRules(extensionFormData)
+		validationRules = h.mergeValidationRules(validationRules, extensionValidationRules)
+
+	}
+
 	formData, err := h.getFormData(ctx, req, h.formDataProvider)
 	if err != nil {
 		h.getLogger("formBuilding").Error(err.Error())
 		return nil, domain.NewFormError(err.Error())
 	}
 
-	form := domain.NewForm(submitted, h.extractValidationRules(formData))
+	mainValidationRules := h.extractValidationRules(formData)
+	validationRules = h.mergeValidationRules(validationRules, mainValidationRules)
+	form := domain.NewForm(submitted, validationRules)
 	form.Data = formData
 
 	return &form, nil
@@ -127,6 +145,14 @@ func (h *formHandlerImpl) handleSubmittedForm(ctx context.Context, req *web.Requ
 	}
 
 	return form, nil
+}
+
+// mergeValidationRules merges two validation rules maps into one
+func (h *formHandlerImpl) mergeValidationRules(first map[string][]domain.ValidationRule, second map[string][]domain.ValidationRule) map[string][]domain.ValidationRule {
+	for k, v := range second {
+		first[k] = v
+	}
+	return first
 }
 
 // extractValidationRules as method for extracting form fields validation rules
