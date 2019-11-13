@@ -84,20 +84,10 @@ func (h *formHandlerImpl) HandleSubmittedGETForm(ctx context.Context, req *web.R
 
 // buildForm as method for creating new instance of Form domain
 func (h *formHandlerImpl) buildForm(ctx context.Context, req *web.Request, submitted bool) (*domain.Form, error) {
-	validationRules := map[string][]domain.ValidationRule{}
-	for _, formExtension := range h.formExtensions {
-		var formDataProvider domain.FormDataProvider
-		if provider, ok := formExtension.(domain.FormDataProvider); ok {
-			formDataProvider = provider
-		}
-		extensionFormData, err := h.getFormData(ctx, req, formDataProvider)
-		if err != nil {
-			h.getLogger("formExtensions").Error(err.Error())
-			return nil, domain.NewFormError(err.Error())
-		}
-		extensionValidationRules := h.extractValidationRules(extensionFormData)
-		validationRules = h.mergeValidationRules(validationRules, extensionValidationRules)
-
+	validationRules, err := h.collectFormExtensionValidationRules(ctx, req)
+	if err != nil {
+		h.getLogger("formExtensions").Error(err.Error())
+		return nil, err
 	}
 
 	formData, err := h.getFormData(ctx, req, h.formDataProvider)
@@ -112,6 +102,24 @@ func (h *formHandlerImpl) buildForm(ctx context.Context, req *web.Request, submi
 	form.Data = formData
 
 	return &form, nil
+}
+
+// collectFormExtensionValidationRules collects validation rules from all form extensions defined for handler and delivers them as a single map
+func (h *formHandlerImpl) collectFormExtensionValidationRules(ctx context.Context, req *web.Request) (map[string][]domain.ValidationRule, error) {
+	validationRules := map[string][]domain.ValidationRule{}
+	for _, formExtension := range h.formExtensions {
+		var formDataProvider domain.FormDataProvider
+		if provider, ok := formExtension.(domain.FormDataProvider); ok {
+			formDataProvider = provider
+		}
+		extensionFormData, err := h.getFormData(ctx, req, formDataProvider)
+		if err != nil {
+			return nil, domain.NewFormError(err.Error())
+		}
+		extensionValidationRules := h.extractValidationRules(extensionFormData)
+		validationRules = h.mergeValidationRules(validationRules, extensionValidationRules)
+	}
+	return validationRules, nil
 }
 
 // handleSubmittedForm as method for processing
