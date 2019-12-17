@@ -30,14 +30,15 @@ func (m *Module) Configure(injector *dingo.Injector) {
 	injector.BindMulti(new(domain.FieldValidator)).To(validators.MinimumAgeValidator{})
 	injector.BindMulti(new(domain.FieldValidator)).To(validators.MaximumAgeValidator{})
 
-	injector.Bind(new(domain.ValidatorProvider)).To(application.ValidatorProviderImpl{}).AsEagerSingleton()
+	injector.Bind(new(domain.ValidatorProvider)).To(application.ValidatorProviderImpl{}).AsEagerSingleton().In(dingo.ChildSingleton)
 
 	injector.Bind(new(domain.DefaultFormDataProvider)).To(formdata.DefaultFormDataProviderImpl{})
 	injector.Bind(new(domain.DefaultFormDataDecoder)).To(formdata.DefaultFormDataDecoderImpl{})
 	injector.Bind(new(domain.DefaultFormDataEncoder)).To(formdata.DefaultFormDataEncoderImpl{})
 	injector.Bind(new(domain.DefaultFormDataValidator)).To(formdata.DefaultFormDataValidatorImpl{})
-	injector.Bind(new(application.FormHandlerFactory)).To(application.FormHandlerFactoryImpl{}).AsEagerSingleton()
-	injector.Bind(new(application.FormDataEncoderFactory)).To(application.FormDataEncoderFactoryImpl{}).AsEagerSingleton()
+
+	injector.Bind(new(application.FormHandlerFactory)).To(application.FormHandlerFactoryImpl{}).AsEagerSingleton().In(dingo.ChildSingleton)
+	injector.Bind(new(application.FormDataEncoderFactory)).To(application.FormDataEncoderFactoryImpl{}).AsEagerSingleton().In(dingo.ChildSingleton)
 }
 
 // DefaultConfig is method which is responsible for setting up default module configuration
