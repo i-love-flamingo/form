@@ -2,24 +2,25 @@ package domain
 
 import "fmt"
 
-type (
-	// Form as struct for storing form processing results
-	Form struct {
-		// Data  the form Data Struct (Forms DTO)
-		Data interface{}
-		// FormExtensionsData the additional form Data Structs (Forms DTO) fetched from form extensions
-		FormExtensionsData map[string]interface{}
-		// ValidationInfo for the form
-		ValidationInfo ValidationInfo
-		// submitted  flag if form was submitted and this is the result page
-		submitted bool
-		// validationRules contains map with validation rules for all validatable fields
-		validationRules map[string][]ValidationRule
-	}
+// Form as struct for storing form processing results
+type Form struct {
+	// Data  the form Data Struct (Forms DTO)
+	Data interface{}
+	// FormExtensionsData the additional form Data Structs (Forms DTO) fetched from form extensions
+	FormExtensionsData map[string]interface{}
+	// ValidationInfo for the form
+	ValidationInfo ValidationInfo
+	// submitted  flag if form was submitted and this is the result page
+	submitted bool
+	// validationRules contains map with validation rules for all validatable fields
+	validationRules map[string][]ValidationRule
+}
 
-	// FormError is used as wrapper for storing form error messages
-	FormError string
-)
+// FormError is used as wrapper for storing form error messages
+type FormError struct {
+	details string
+	parent  error
+}
 
 // NewForm returns new instance of Form struct
 func NewForm(submitted bool, validationRules map[string][]ValidationRule) Form {
@@ -81,15 +82,30 @@ func (f Form) GetValidationRules() map[string][]ValidationRule {
 
 // NewFormError returns new instance of error interface by defining string content of error
 func NewFormError(details string) FormError {
-	return FormError(details)
+	return FormError{
+		details: details,
+	}
 }
 
 // NewFormErrorf returns new instance of error interface by defining formatted string content of error with arguments
 func NewFormErrorf(details string, args ...interface{}) FormError {
-	return FormError(fmt.Sprintf(details, args...))
+	return NewFormError(fmt.Sprintf(details, args...))
+}
+
+// NewFormErrorWithParent returns new instance of error interface by defining parent error
+func NewFormErrorWithParent(err error) FormError {
+	return FormError{
+		details: err.Error(),
+		parent:  err,
+	}
 }
 
 // Error represents implementation for required method so FormError can fulfil error interface
 func (e FormError) Error() string {
-	return fmt.Sprintf("FormError: %s", string(e))
+	return fmt.Sprintf("FormError: %s", e.details)
+}
+
+// Parent returns parent error wrapped by FormError
+func (e FormError) Parent() error {
+	return e.parent
 }
