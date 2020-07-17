@@ -56,7 +56,7 @@ func (h *formHandlerImpl) HandleUnsubmittedForm(ctx context.Context, req *web.Re
 	err = h.processExtensions(ctx, req, url.Values{}, form)
 	if err != nil {
 		h.getLogger("formExtensions").Error(err.Error())
-		return nil, domain.NewFormError(err.Error())
+		return nil, domain.NewFormErrorWithParent(err)
 	}
 
 	return form, nil
@@ -93,7 +93,7 @@ func (h *formHandlerImpl) buildForm(ctx context.Context, req *web.Request, submi
 	formData, err := h.getFormData(ctx, req, h.formDataProvider)
 	if err != nil {
 		h.getLogger("formBuilding").Error(err.Error())
-		return nil, domain.NewFormError(err.Error())
+		return nil, domain.NewFormErrorWithParent(err)
 	}
 
 	mainValidationRules := h.extractValidationRules(formData)
@@ -114,7 +114,7 @@ func (h *formHandlerImpl) collectFormExtensionValidationRules(ctx context.Contex
 		}
 		extensionFormData, err := h.getFormData(ctx, req, formDataProvider)
 		if err != nil {
-			return nil, domain.NewFormError(err.Error())
+			return nil, domain.NewFormErrorWithParent(err)
 		}
 		extensionValidationRules := h.extractValidationRules(extensionFormData)
 		validationRules = h.mergeValidationRules(validationRules, extensionValidationRules)
@@ -127,20 +127,20 @@ func (h *formHandlerImpl) handleSubmittedForm(ctx context.Context, req *web.Requ
 	values, err := h.getURLValues(req, method)
 	if err != nil {
 		h.getLogger("postValueProcessing").Error(err.Error())
-		return nil, domain.NewFormError(err.Error())
+		return nil, domain.NewFormErrorWithParent(err)
 	}
 
 	formData, err := h.decode(ctx, req, *values, form.Data, h.formDataDecoder)
 	if err != nil {
 		h.getLogger("formDecoding").Error(err.Error())
-		return nil, domain.NewFormError(err.Error())
+		return nil, domain.NewFormErrorWithParent(err)
 	}
 	form.Data = formData
 
 	validationInfo, err := h.validate(ctx, req, h.validatorProvider, formData, h.formDataValidator)
 	if err != nil {
 		h.getLogger("formValidation").Error(err.Error())
-		return nil, domain.NewFormError(err.Error())
+		return nil, domain.NewFormErrorWithParent(err)
 	} else if validationInfo == nil {
 		validationInfo = &domain.ValidationInfo{}
 	}
@@ -149,7 +149,7 @@ func (h *formHandlerImpl) handleSubmittedForm(ctx context.Context, req *web.Requ
 	err = h.processExtensions(ctx, req, *values, form)
 	if err != nil {
 		h.getLogger("formExtensions").Error(err.Error())
-		return nil, domain.NewFormError(err.Error())
+		return nil, domain.NewFormErrorWithParent(err)
 	}
 
 	return form, nil

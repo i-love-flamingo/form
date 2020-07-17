@@ -102,7 +102,7 @@ func (t *FormHandlerImplTestSuite) TestHandleUnsubmittedForm_Error() {
 	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 
 	result, err := t.handler.HandleUnsubmittedForm(t.context, t.request)
-	t.Equal(domain.FormError("error"), err)
+	t.Equal(domain.NewFormErrorWithParent(errors.New("error")), err)
 	t.Nil(result)
 }
 
@@ -489,7 +489,7 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_GetFormDataError() {
 	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
 
 	result, err := t.handler.HandleSubmittedForm(t.context, t.request)
-	t.Equal(domain.FormError("error"), err)
+	t.Equal(domain.NewFormErrorWithParent(errors.New("error")), err)
 	t.Nil(result)
 }
 
@@ -503,7 +503,7 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_PostValueProcessingEr
 	t.request.Request().Method = http.MethodPost
 
 	result, err := t.handler.HandleSubmittedForm(t.context, t.request)
-	t.Equal(domain.FormError("missing form body"), err)
+	t.Equal(domain.NewFormErrorWithParent(errors.New("missing form body")), err)
 	t.Nil(result)
 }
 
@@ -526,7 +526,7 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_DecodeError() {
 	}, map[string]string{}).Return(nil, errors.New("error")).Once()
 
 	result, err := t.handler.HandleSubmittedForm(t.context, t.request)
-	t.Equal(domain.FormError("error"), err)
+	t.Equal(domain.NewFormErrorWithParent(errors.New("error")), err)
 	t.Nil(result)
 }
 
@@ -557,7 +557,7 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_ValidateError() {
 	}).Return(nil, errors.New("error")).Once()
 
 	result, err := t.handler.HandleSubmittedForm(t.context, t.request)
-	t.Equal(domain.FormError("error"), err)
+	t.Equal(domain.NewFormErrorWithParent(errors.New("error")), err)
 	t.Nil(result)
 }
 
@@ -573,7 +573,7 @@ func (t *FormHandlerImplTestSuite) TestHandleSubmittedForm_FormExtensionError() 
 	t.defaultProvider.On("GetFormData", t.context, t.request).Return(nil, errors.New("error")).Maybe()
 
 	result, err := t.handler.HandleSubmittedForm(t.context, t.request)
-	t.Equal(domain.FormError("error"), err)
+	t.Equal(domain.NewFormErrorWithParent(errors.New("error")), err)
 	t.Nil(result)
 }
 
