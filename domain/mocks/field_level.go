@@ -94,6 +94,118 @@ func (_m *FieldLevel) GetStructFieldOK() (reflect.Value, reflect.Kind, bool) {
 	return r0, r1, r2
 }
 
+// GetStructFieldOK2 provides a mock function with given fields:
+func (_m *FieldLevel) GetStructFieldOK2() (reflect.Value, reflect.Kind, bool, bool) {
+	ret := _m.Called()
+
+	var r0 reflect.Value
+	if rf, ok := ret.Get(0).(func() reflect.Value); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(reflect.Value)
+	}
+
+	var r1 reflect.Kind
+	if rf, ok := ret.Get(1).(func() reflect.Kind); ok {
+		r1 = rf()
+	} else {
+		r1 = ret.Get(1).(reflect.Kind)
+	}
+
+	var r2 bool
+	if rf, ok := ret.Get(2).(func() bool); ok {
+		r2 = rf()
+	} else {
+		r2 = ret.Get(2).(bool)
+	}
+
+	var r3 bool
+	if rf, ok := ret.Get(3).(func() bool); ok {
+		r3 = rf()
+	} else {
+		r3 = ret.Get(3).(bool)
+	}
+
+	return r0, r1, r2, r3
+}
+
+// GetStructFieldOKAdvanced provides a mock function with given fields: val, namespace
+func (_m *FieldLevel) GetStructFieldOKAdvanced(val reflect.Value, namespace string) (reflect.Value, reflect.Kind, bool) {
+	ret := _m.Called(val, namespace)
+
+	var r0 reflect.Value
+	if rf, ok := ret.Get(0).(func(reflect.Value, string) reflect.Value); ok {
+		r0 = rf(val, namespace)
+	} else {
+		r0 = ret.Get(0).(reflect.Value)
+	}
+
+	var r1 reflect.Kind
+	if rf, ok := ret.Get(1).(func(reflect.Value, string) reflect.Kind); ok {
+		r1 = rf(val, namespace)
+	} else {
+		r1 = ret.Get(1).(reflect.Kind)
+	}
+
+	var r2 bool
+	if rf, ok := ret.Get(2).(func(reflect.Value, string) bool); ok {
+		r2 = rf(val, namespace)
+	} else {
+		r2 = ret.Get(2).(bool)
+	}
+
+	return r0, r1, r2
+}
+
+// GetStructFieldOKAdvanced2 provides a mock function with given fields: val, namespace
+func (_m *FieldLevel) GetStructFieldOKAdvanced2(val reflect.Value, namespace string) (reflect.Value, reflect.Kind, bool, bool) {
+	ret := _m.Called(val, namespace)
+
+	var r0 reflect.Value
+	if rf, ok := ret.Get(0).(func(reflect.Value, string) reflect.Value); ok {
+		r0 = rf(val, namespace)
+	} else {
+		r0 = ret.Get(0).(reflect.Value)
+	}
+
+	var r1 reflect.Kind
+	if rf, ok := ret.Get(1).(func(reflect.Value, string) reflect.Kind); ok {
+		r1 = rf(val, namespace)
+	} else {
+		r1 = ret.Get(1).(reflect.Kind)
+	}
+
+	var r2 bool
+	if rf, ok := ret.Get(2).(func(reflect.Value, string) bool); ok {
+		r2 = rf(val, namespace)
+	} else {
+		r2 = ret.Get(2).(bool)
+	}
+
+	var r3 bool
+	if rf, ok := ret.Get(3).(func(reflect.Value, string) bool); ok {
+		r3 = rf(val, namespace)
+	} else {
+		r3 = ret.Get(3).(bool)
+	}
+
+	return r0, r1, r2, r3
+}
+
+// GetTag provides a mock function with given fields:
+func (_m *FieldLevel) GetTag() string {
+	ret := _m.Called()
+
+	var r0 string
+	if rf, ok := ret.Get(0).(func() string); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(string)
+	}
+
+	return r0
+}
+
 // Param provides a mock function with given fields:
 func (_m *FieldLevel) Param() string {
 	ret := _m.Called()
