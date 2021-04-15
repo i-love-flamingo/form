@@ -37,7 +37,7 @@ func (t *DefaultFormDataValidatorImplTestSuite) TearDownTest() {
 }
 
 func (t *DefaultFormDataValidatorImplTestSuite) TestGetFormData_Struct() {
-	object := struct {}{}
+	object := struct{}{}
 	t.validatorProvider.On("Validate", nil, (*web.Request)(nil), object).Return(domain.ValidationInfo{}).Once()
 
 	result, err := t.validator.Validate(nil, nil, t.validatorProvider, object)

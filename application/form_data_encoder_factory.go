@@ -11,25 +11,23 @@ type (
 
 	// FormDataEncoderFactoryImpl as actual implementation of FormDataEncoderFactory interface
 	FormDataEncoderFactoryImpl struct {
-		namedFormServices        map[string]domain.FormService
-		namedFormDataEncoders    map[string]domain.FormDataEncoder
-		defaultFormDataEncoder   domain.DefaultFormDataEncoder
+		namedFormServices      map[string]domain.FormService
+		namedFormDataEncoders  map[string]domain.FormDataEncoder
+		defaultFormDataEncoder domain.DefaultFormDataEncoder
 	}
 )
 
-
 // Inject is method used to set all dependencies as local variables
 func (f *FormDataEncoderFactoryImpl) Inject(
-	namedFormDataEncoders    map[string]domain.FormDataEncoder,
-	namedFormServices        map[string]domain.FormService,
-	defaultFormDataEncoder   domain.DefaultFormDataEncoder,
+	namedFormDataEncoders map[string]domain.FormDataEncoder,
+	namedFormServices map[string]domain.FormService,
+	defaultFormDataEncoder domain.DefaultFormDataEncoder,
 
 ) {
 	f.namedFormServices = namedFormServices
 	f.namedFormDataEncoders = namedFormDataEncoders
 	f.defaultFormDataEncoder = defaultFormDataEncoder
 }
-
 
 // CreateWithFormService - factory method
 func (f *FormDataEncoderFactoryImpl) CreateWithFormService(formService domain.FormService) domain.FormDataEncoder {
@@ -38,7 +36,6 @@ func (f *FormDataEncoderFactoryImpl) CreateWithFormService(formService domain.Fo
 	}
 	return f.defaultFormDataEncoder
 }
-
 
 // CreateByNamedEncoder - factory method
 func (f *FormDataEncoderFactoryImpl) CreateByNamedEncoder(name string) domain.FormDataEncoder {
