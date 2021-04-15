@@ -14,6 +14,7 @@ require (
 	github.com/leebenson/conform v0.0.0-20180615210222-bc2e0311fd85
 	github.com/leodido/go-urn v1.1.0 // indirect
 	github.com/stretchr/testify v1.4.0
+	github.com/vektra/mockery v1.1.2 // indirect
 	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5 // indirect
 	golang.org/x/mod v0.4.2 // indirect
 	golang.org/x/sys v0.0.0-20210415045647-66c3f260301c // indirect
