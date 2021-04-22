@@ -25,7 +25,7 @@ type (
 		Value string
 	}
 
-	// Error - representation of an Error Message - intented usage is to display errors in the view to the end user
+	// Error - representation of an Error Message - intended usage is to display errors in the view to the end user
 	Error struct {
 		// MessageKey - a key of the error message. Often used to pass to translation func in the template
 		MessageKey string

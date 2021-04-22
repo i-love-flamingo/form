@@ -4,7 +4,6 @@ import (
 	"context"
 	"net/url"
 
-
 	"github.com/go-playground/form"
 
 	"flamingo.me/form/domain"
@@ -21,8 +20,8 @@ var _ domain.DefaultFormDataEncoder = &DefaultFormDataEncoderImpl{}
 func (p *DefaultFormDataEncoderImpl) Encode(_ context.Context, formData interface{}) (url.Values, error) {
 	if data, ok := formData.(map[string]string); ok {
 		urlValues := make(url.Values)
-		for k,v := range data {
-			urlValues[k]=[]string{v}
+		for k, v := range data {
+			urlValues[k] = []string{v}
 		}
 		return urlValues, nil
 	}

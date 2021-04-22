@@ -341,11 +341,11 @@ func (t *FormHandlerImplTestSuite) TestExtractValidationRules_Struct() {
 
 func (t *FormHandlerImplTestSuite) TestCollectFormExtensionValidationRules() {
 	t.firstExtension.On("GetFormData", t.context, t.request).Return(struct {
-		FirstFirstField string `form:"firstFirstField" validate:"required,min=10"`
+		FirstFirstField  string `form:"firstFirstField" validate:"required,min=10"`
 		FirstSecondField string `form:"firstSecondField" validate:"required"`
 	}{}, nil).Once()
 	t.secondExtension.On("GetFormData", t.context, t.request).Return(struct {
-		SecondFirstField string `form:"secondFirstField" validate:"required,min=10"`
+		SecondFirstField  string `form:"secondFirstField" validate:"required,min=10"`
 		SecondSecondField string `form:"secondSecondField" validate:"required"`
 	}{}, nil).Once()
 	t.defaultProvider.On("GetFormData", t.context, t.request).Return(map[string]int{}, nil).Twice()
@@ -359,7 +359,7 @@ func (t *FormHandlerImplTestSuite) TestCollectFormExtensionValidationRules() {
 				Name: "required",
 			},
 			{
-				Name: "min",
+				Name:  "min",
 				Value: "10",
 			},
 		},
@@ -373,7 +373,7 @@ func (t *FormHandlerImplTestSuite) TestCollectFormExtensionValidationRules() {
 				Name: "required",
 			},
 			{
-				Name: "min",
+				Name:  "min",
 				Value: "10",
 			},
 		},
