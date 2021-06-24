@@ -8,7 +8,7 @@ import (
 
 	"flamingo.me/form/domain"
 
-	validator "gopkg.in/go-playground/validator.v9"
+	"gopkg.in/go-playground/validator.v9"
 )
 
 type (
@@ -65,7 +65,7 @@ func (v *MaximumAgeValidator) ValidateField(_ context.Context, fl validator.Fiel
 	}
 
 	now := time.Now()
-	desired := time.Date(now.Year()-years, now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
+	desired := time.Date(now.Year()-years-1, now.Month(), now.Day(), 0, 0, 0, 0, time.UTC)
 
-	return date.After(desired) || date.Equal(desired)
+	return date.After(desired)
 }
