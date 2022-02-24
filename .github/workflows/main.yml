@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go: [ '1.16', '1.*' ]
+        go: [ '1.17', '1.*' ]
     name: Tests
     steps:
       - uses: actions/checkout@v2
@@ -46,11 +46,11 @@ jobs:
           fmt=$(gofmt -l .)
           test -z $fmt || (echo "please run gofmt" ; echo $fmt ; exit 1)
       - name: Go Lint
-        run: go run golang.org/x/lint/golint -set_exit_status $(go list ./...)
+        run: go run golang.org/x/lint/golint@latest -set_exit_status $(go list ./...)
       - name: Spelling
-        run: go run github.com/client9/misspell/cmd/misspell -error .
+        run: go run github.com/client9/misspell/cmd/misspell@latest -error .
       - name: Ineffective assignments
-        run: go run github.com/gordonklaus/ineffassign .
+        run: go run github.com/gordonklaus/ineffassign@latest .
       - name: Go Generate
         run: |
           go generate ./...
