@@ -6,7 +6,7 @@ require (
 	flamingo.me/dingo v0.2.9
 	flamingo.me/flamingo/v3 v3.3.0
 	github.com/go-playground/form v3.1.4+incompatible
-	github.com/go-playground/universal-translator v0.17.0
+	github.com/go-playground/universal-translator v0.18.0
 	github.com/leebenson/conform v1.2.2
 	github.com/stretchr/testify v1.8.0
 	gopkg.in/go-playground/validator.v9 v9.31.0
@@ -24,7 +24,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/etgryphon/stringUp v0.0.0-20121020160746-31534ccd8cac // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
-	github.com/go-playground/locales v0.13.0 // indirect
+	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gomodule/redigo v2.0.0+incompatible // indirect
