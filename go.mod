@@ -8,7 +8,7 @@ require (
 	github.com/go-playground/form v3.1.4+incompatible
 	github.com/go-playground/universal-translator v0.17.0
 	github.com/leebenson/conform v1.2.2
-	github.com/stretchr/testify v1.7.0
+	github.com/stretchr/testify v1.8.0
 	gopkg.in/go-playground/validator.v9 v9.31.0
 )
 
@@ -43,7 +43,7 @@ require (
 	github.com/prometheus/procfs v0.0.10 // indirect
 	github.com/spf13/cobra v1.2.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/objx v0.2.0 // indirect
+	github.com/stretchr/objx v0.4.0 // indirect
 	github.com/uber/jaeger-client-go v2.22.1+incompatible // indirect
 	github.com/zemirco/memorystore v0.0.0-20160308183530-ecd57e5134f6 // indirect
 	go.opencensus.io v0.23.0 // indirect
@@ -56,5 +56,5 @@ require (
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
