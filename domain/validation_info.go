@@ -137,7 +137,7 @@ func (vi *ValidationInfo) GetErrorsForField(fieldName string) []Error {
 	return vi.fieldErrors[fieldName]
 }
 
-//GetValidationSummary - returns a string with all validation messages - useful for logging or other summarized needs
+// GetValidationSummary - returns a string with all validation messages - useful for logging or other summarized needs
 func (vi *ValidationInfo) GetValidationSummary() string {
 	result := "invalid form: "
 	for k, errors := range vi.GetErrorsForAllFields() {

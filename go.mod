@@ -1,6 +1,6 @@
 module flamingo.me/form
 
-go 1.17
+go 1.18
 
 require (
 	flamingo.me/dingo v0.2.9
@@ -8,7 +8,7 @@ require (
 	github.com/go-playground/form v3.1.4+incompatible
 	github.com/go-playground/universal-translator v0.18.0
 	github.com/leebenson/conform v1.2.2
-	github.com/stretchr/testify v1.8.0
+	github.com/stretchr/testify v1.8.1
 	gopkg.in/go-playground/validator.v9 v9.31.0
 )
 
@@ -43,7 +43,7 @@ require (
 	github.com/prometheus/procfs v0.0.10 // indirect
 	github.com/spf13/cobra v1.2.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/objx v0.4.0 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/uber/jaeger-client-go v2.22.1+incompatible // indirect
 	github.com/zemirco/memorystore v0.0.0-20160308183530-ecd57e5134f6 // indirect
 	go.opencensus.io v0.23.0 // indirect
