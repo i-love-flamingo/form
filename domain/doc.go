@@ -1,3 +1,3 @@
 package domain
 
-//go:generate go run github.com/vektra/mockery/v2@v2.10.0 --all --case=underscore
+//go:generate go run github.com/vektra/mockery/v2@v2.23.1 --all --case=underscore
