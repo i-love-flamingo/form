@@ -8,7 +8,7 @@ require (
 	github.com/go-playground/form v3.1.4+incompatible
 	github.com/go-playground/universal-translator v0.18.0
 	github.com/leebenson/conform v1.2.2
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 	gopkg.in/go-playground/validator.v9 v9.31.0
 )
 
