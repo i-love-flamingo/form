@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	flamingo.me/dingo v0.2.10
-	flamingo.me/flamingo/v3 v3.5.1
+	flamingo.me/flamingo/v3 v3.6.0
 	github.com/go-playground/form v3.1.4+incompatible
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/leebenson/conform v1.2.2
@@ -19,7 +19,7 @@ require (
 	cuelang.org/go v0.0.15 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/boj/redistore v0.0.0-20180917114910-cd5dcc76aeff // indirect
-	github.com/cespare/xxhash/v2 v2.1.2 // indirect
+	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/cockroachdb/apd/v2 v2.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
@@ -47,6 +47,8 @@ require (
 	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/prometheus/statsd_exporter v0.22.7 // indirect
 	github.com/rbcervilla/redisstore/v8 v8.1.0 // indirect
+	github.com/rbcervilla/redisstore/v9 v9.0.0 // indirect
+	github.com/redis/go-redis/v9 v9.0.3 // indirect
 	github.com/spf13/cobra v1.2.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/objx v0.5.0 // indirect
