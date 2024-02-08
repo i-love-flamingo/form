@@ -5,7 +5,7 @@ import (
 	"regexp"
 
 	"flamingo.me/form/domain"
-	validator "gopkg.in/go-playground/validator.v9"
+	validator "github.com/go-playground/validator/v10"
 )
 
 type (

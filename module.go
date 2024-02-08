@@ -9,6 +9,8 @@ import (
 	"flamingo.me/form/domain/validators"
 )
 
+//go:generate go run github.com/vektra/mockery/v2@v2.40.1
+
 type (
 	// Module is struct for defining form2 module dependencies
 	Module struct {

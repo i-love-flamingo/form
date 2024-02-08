@@ -2,9 +2,9 @@ package domain
 
 import (
 	"context"
+	validator "github.com/go-playground/validator/v10"
 
 	"flamingo.me/flamingo/v3/framework/web"
-	"gopkg.in/go-playground/validator.v9"
 )
 
 type (

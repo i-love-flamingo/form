@@ -1,4 +1,34 @@
-inpackage: False
-testonly: False
-with-expecter: True
-keeptree: True
+# mock might needed in all places
+testonly: false
+# for better usability of the mocks
+with-expecter: true
+# less changes in update pull requests
+disable-version-string: true
+# generate mocks in separate package
+inpackage: false
+# use original interface name as name, we use a dedicated `mocks` package to make the context clear
+mockname: "{{.InterfaceName}}"
+# snake case file names
+filename: "{{.InterfaceNameSnake}}.go"
+# place all mocks in the mocks package
+outpkg: "mocks"
+# all mocks in a single folder without sub folders per package
+dir: "{{.InterfaceDirRelative}}/mocks"
+
+# mocks to generate
+packages:
+  "flamingo.me/form/domain":
+    config:
+      all: true
+      recursive: true
+  "flamingo.me/form/application":
+    config:
+      all: true
+      recursive: true
+  "github.com/go-playground/validator/v10":
+    config:
+      dir: "domain/mocks"
+    interfaces:
+      FieldLevel:
+      StructLevel:
+      FieldError:

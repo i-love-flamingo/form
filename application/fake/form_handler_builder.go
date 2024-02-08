@@ -3,13 +3,12 @@ package fake
 import (
 	"flamingo.me/form/application"
 	"flamingo.me/form/domain"
-	"flamingo.me/form/domain/mocks"
 )
 
 type (
 	// formHandlerBuilderImpl defines faked implementation of FormHandlerBuilder interface used for unit testing
 	formHandlerBuilderImpl struct {
-		formHandler *mocks.FormHandler
+		formHandler domain.FormHandler
 	}
 )
 
