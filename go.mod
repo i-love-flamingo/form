@@ -11,7 +11,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/leebenson/conform v1.2.2
 	github.com/stretchr/testify v1.8.4
-	gopkg.in/go-playground/validator.v9 v9.31.0
+	gopkg.in/go-playground/validator.v10 v10.17.0
 )
 
 require (
