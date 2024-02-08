@@ -12,7 +12,7 @@ mockname: "{{.InterfaceName}}"
 filename: "{{.InterfaceNameSnake}}.go"
 # place all mocks in the mocks package
 outpkg: "mocks"
-# all mocks in a single folder without sub folders per package
+# all mocks should live near their interfaces
 dir: "{{.InterfaceDirRelative}}/mocks"
 
 # mocks to generate
