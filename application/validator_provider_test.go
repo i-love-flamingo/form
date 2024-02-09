@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
+	validator "github.com/go-playground/validator/v10"
 	"github.com/stretchr/testify/suite"
-	validator "gopkg.in/go-playground/validator.v9"
 
 	"flamingo.me/flamingo/v3/framework/web"
 	"flamingo.me/form/domain"

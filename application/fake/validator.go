@@ -1,9 +1,8 @@
 package fake
 
 import (
-	"reflect"
-
 	"flamingo.me/form/domain/mocks"
+	"reflect"
 )
 
 // NewFieldLevel is helper method to provide mocked instance of validator.FieldLevel interface

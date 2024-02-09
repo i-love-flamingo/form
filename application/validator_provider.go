@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	validator "gopkg.in/go-playground/validator.v9"
+	"github.com/go-playground/validator/v10"
 
 	"flamingo.me/flamingo/v3/framework/web"
 	"flamingo.me/form/domain"

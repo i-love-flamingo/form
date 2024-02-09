@@ -2,13 +2,12 @@ package validators
 
 import (
 	"context"
+	"github.com/go-playground/validator/v10"
 	"strconv"
 	"strings"
 	"time"
 
 	"flamingo.me/form/domain"
-
-	"gopkg.in/go-playground/validator.v9"
 )
 
 type (

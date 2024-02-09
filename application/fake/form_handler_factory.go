@@ -3,18 +3,17 @@ package fake
 import (
 	"flamingo.me/form/application"
 	"flamingo.me/form/domain"
-	"flamingo.me/form/domain/mocks"
 )
 
 type (
 	// FormHandlerFactoryImpl defines faked implementation of FormHandlerFactory interface used for unit testing
 	FormHandlerFactoryImpl struct {
-		formHandler *mocks.FormHandler
+		formHandler domain.FormHandler
 	}
 )
 
 // New returns faked implementation of FormHandlerFactory interface which should deliver mocked domain.FormHandler instance
-func New(formHandler *mocks.FormHandler) application.FormHandlerFactory {
+func New(formHandler domain.FormHandler) application.FormHandlerFactory {
 	return &FormHandlerFactoryImpl{
 		formHandler: formHandler,
 	}
