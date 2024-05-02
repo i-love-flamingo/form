@@ -2,7 +2,7 @@ module flamingo.me/form
 
 go 1.21
 
-toolchain go1.21.6
+toolchain go1.22.2
 
 require (
 	flamingo.me/dingo v0.2.10
