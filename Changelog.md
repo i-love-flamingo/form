@@ -1,5 +1,12 @@
 # Changelog
 
+## Version v1.1.3 (2024-05-02)
+
+### Chores and tidying
+
+- **deps:** update dependency go to v1.22.2 (#48) (05633cc7)
+- **deps:** update module github.com/stretchr/testify to v1.9.0 (#46) (96a48511)
+
 ## Version v1.1.2 (2024-02-09)
 
 ### Tests
