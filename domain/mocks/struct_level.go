@@ -23,7 +23,7 @@ func (_m *StructLevel) EXPECT() *StructLevel_Expecter {
 	return &StructLevel_Expecter{mock: &_m.Mock}
 }
 
-// Current provides a mock function with given fields:
+// Current provides a mock function with no fields
 func (_m *StructLevel) Current() reflect.Value {
 	ret := _m.Called()
 
@@ -131,7 +131,7 @@ func (_c *StructLevel_ExtractType_Call) RunAndReturn(run func(reflect.Value) (re
 	return _c
 }
 
-// Parent provides a mock function with given fields:
+// Parent provides a mock function with no fields
 func (_m *StructLevel) Parent() reflect.Value {
 	ret := _m.Called()
 
@@ -209,7 +209,7 @@ func (_c *StructLevel_ReportError_Call) Return() *StructLevel_ReportError_Call {
 }
 
 func (_c *StructLevel_ReportError_Call) RunAndReturn(run func(interface{}, string, string, string, string)) *StructLevel_ReportError_Call {
-	_c.Call.Return(run)
+	_c.Run(run)
 	return _c
 }
 
@@ -244,11 +244,11 @@ func (_c *StructLevel_ReportValidationErrors_Call) Return() *StructLevel_ReportV
 }
 
 func (_c *StructLevel_ReportValidationErrors_Call) RunAndReturn(run func(string, string, validator.ValidationErrors)) *StructLevel_ReportValidationErrors_Call {
-	_c.Call.Return(run)
+	_c.Run(run)
 	return _c
 }
 
-// Top provides a mock function with given fields:
+// Top provides a mock function with no fields
 func (_m *StructLevel) Top() reflect.Value {
 	ret := _m.Called()
 
@@ -293,7 +293,7 @@ func (_c *StructLevel_Top_Call) RunAndReturn(run func() reflect.Value) *StructLe
 	return _c
 }
 
-// Validator provides a mock function with given fields:
+// Validator provides a mock function with no fields
 func (_m *StructLevel) Validator() *validator.Validate {
 	ret := _m.Called()
 

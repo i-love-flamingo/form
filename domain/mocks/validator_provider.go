@@ -72,7 +72,7 @@ func (_c *ValidatorProvider_ErrorsToValidationInfo_Call) RunAndReturn(run func(e
 	return _c
 }
 
-// GetValidator provides a mock function with given fields:
+// GetValidator provides a mock function with no fields
 func (_m *ValidatorProvider) GetValidator() *validator.Validate {
 	ret := _m.Called()
 

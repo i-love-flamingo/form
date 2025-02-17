@@ -150,7 +150,7 @@ func (_c *FormHandlerFactory_CreateFormHandlerWithFormServices_Call) RunAndRetur
 	return _c
 }
 
-// CreateSimpleFormHandler provides a mock function with given fields:
+// CreateSimpleFormHandler provides a mock function with no fields
 func (_m *FormHandlerFactory) CreateSimpleFormHandler() domain.FormHandler {
 	ret := _m.Called()
 
@@ -197,7 +197,7 @@ func (_c *FormHandlerFactory_CreateSimpleFormHandler_Call) RunAndReturn(run func
 	return _c
 }
 
-// GetFormHandlerBuilder provides a mock function with given fields:
+// GetFormHandlerBuilder provides a mock function with no fields
 func (_m *FormHandlerFactory) GetFormHandlerBuilder() application.FormHandlerBuilder {
 	ret := _m.Called()
 

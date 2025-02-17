@@ -114,7 +114,7 @@ func (_c *FormHandlerBuilder_AddNamedFormExtension_Call) RunAndReturn(run func(s
 	return _c
 }
 
-// Build provides a mock function with given fields:
+// Build provides a mock function with no fields
 func (_m *FormHandlerBuilder) Build() domain.FormHandler {
 	ret := _m.Called()
 
