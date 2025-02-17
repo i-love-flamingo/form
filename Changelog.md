@@ -1,5 +1,27 @@
 # Changelog
 
+## Version v1.1.3 (2025-02-17)
+
+### Chores and tidying
+
+- **deps:** update module github.com/go-playground/validator/v10 to v10.25.0 (#62) (8ac1f64b)
+- **deps:** update module flamingo.me/flamingo/v3 to v3.13.0 (#65) (f74f6c1e)
+- **deps:** update dependency go to v1.23.2 (#55) (2f364ad7)
+- **deps:** update module github.com/vektra/mockery/v2 to v2.46.3 (#59) (2fa2cfd0)
+- **deps:** update module github.com/vektra/mockery/v2 to v2.46.1 (#58) (501b8e00)
+- **deps:** update module github.com/go-playground/validator/v10 to v10.22.1 (#56) (28c9e9a4)
+- **deps:** update module flamingo.me/flamingo/v3 to v3.11.0 (#54) (550d6aac)
+- **deps:** update module github.com/vektra/mockery/v2 to v2.46.0 (#57) (853869aa)
+- **deps:** update dependency go to v1.23.0 (#52) (47e5c117)
+- **deps:** update module github.com/vektra/mockery/v2 to v2.45.0 (#53) (68cf6432)
+- **deps:** update module github.com/vektra/mockery/v2 to v2.44.1 (#51) (1d960829)
+- **deps:** update module github.com/vektra/mockery/v2 to v2.43.2 (#44) (3d26489c)
+- **deps:** update dependency go to v1.22.5 (#50) (20689a7b)
+- **deps:** update module flamingo.me/flamingo/v3 to v3.9.0 (#49) (15dbe5bf)
+- **deps:** update module github.com/go-playground/validator/v10 to v10.22.0 (#45) (d9b6333c)
+- **deps:** update dependency go to v1.22.2 (#48) (05633cc7)
+- **deps:** update module github.com/stretchr/testify to v1.9.0 (#46) (96a48511)
+
 ## Version v1.1.2 (2024-02-09)
 
 ### Tests
