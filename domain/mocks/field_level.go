@@ -84,7 +84,7 @@ func (_c *FieldLevel_ExtractType_Call) RunAndReturn(run func(reflect.Value) (ref
 	return _c
 }
 
-// Field provides a mock function with given fields:
+// Field provides a mock function with no fields
 func (_m *FieldLevel) Field() reflect.Value {
 	ret := _m.Called()
 
@@ -129,7 +129,7 @@ func (_c *FieldLevel_Field_Call) RunAndReturn(run func() reflect.Value) *FieldLe
 	return _c
 }
 
-// FieldName provides a mock function with given fields:
+// FieldName provides a mock function with no fields
 func (_m *FieldLevel) FieldName() string {
 	ret := _m.Called()
 
@@ -174,7 +174,7 @@ func (_c *FieldLevel_FieldName_Call) RunAndReturn(run func() string) *FieldLevel
 	return _c
 }
 
-// GetStructFieldOK provides a mock function with given fields:
+// GetStructFieldOK provides a mock function with no fields
 func (_m *FieldLevel) GetStructFieldOK() (reflect.Value, reflect.Kind, bool) {
 	ret := _m.Called()
 
@@ -236,7 +236,7 @@ func (_c *FieldLevel_GetStructFieldOK_Call) RunAndReturn(run func() (reflect.Val
 	return _c
 }
 
-// GetStructFieldOK2 provides a mock function with given fields:
+// GetStructFieldOK2 provides a mock function with no fields
 func (_m *FieldLevel) GetStructFieldOK2() (reflect.Value, reflect.Kind, bool, bool) {
 	ret := _m.Called()
 
@@ -440,7 +440,7 @@ func (_c *FieldLevel_GetStructFieldOKAdvanced2_Call) RunAndReturn(run func(refle
 	return _c
 }
 
-// GetTag provides a mock function with given fields:
+// GetTag provides a mock function with no fields
 func (_m *FieldLevel) GetTag() string {
 	ret := _m.Called()
 
@@ -485,7 +485,7 @@ func (_c *FieldLevel_GetTag_Call) RunAndReturn(run func() string) *FieldLevel_Ge
 	return _c
 }
 
-// Param provides a mock function with given fields:
+// Param provides a mock function with no fields
 func (_m *FieldLevel) Param() string {
 	ret := _m.Called()
 
@@ -530,7 +530,7 @@ func (_c *FieldLevel_Param_Call) RunAndReturn(run func() string) *FieldLevel_Par
 	return _c
 }
 
-// Parent provides a mock function with given fields:
+// Parent provides a mock function with no fields
 func (_m *FieldLevel) Parent() reflect.Value {
 	ret := _m.Called()
 
@@ -575,7 +575,7 @@ func (_c *FieldLevel_Parent_Call) RunAndReturn(run func() reflect.Value) *FieldL
 	return _c
 }
 
-// StructFieldName provides a mock function with given fields:
+// StructFieldName provides a mock function with no fields
 func (_m *FieldLevel) StructFieldName() string {
 	ret := _m.Called()
 
@@ -620,7 +620,7 @@ func (_c *FieldLevel_StructFieldName_Call) RunAndReturn(run func() string) *Fiel
 	return _c
 }
 
-// Top provides a mock function with given fields:
+// Top provides a mock function with no fields
 func (_m *FieldLevel) Top() reflect.Value {
 	ret := _m.Called()
 

@@ -23,7 +23,7 @@ func (_m *StructValidator) EXPECT() *StructValidator_Expecter {
 	return &StructValidator_Expecter{mock: &_m.Mock}
 }
 
-// StructType provides a mock function with given fields:
+// StructType provides a mock function with no fields
 func (_m *StructValidator) StructType() interface{} {
 	ret := _m.Called()
 
@@ -100,7 +100,7 @@ func (_c *StructValidator_ValidateStruct_Call) Return() *StructValidator_Validat
 }
 
 func (_c *StructValidator_ValidateStruct_Call) RunAndReturn(run func(context.Context, validator.StructLevel)) *StructValidator_ValidateStruct_Call {
-	_c.Call.Return(run)
+	_c.Run(run)
 	return _c
 }
 

@@ -70,7 +70,7 @@ func (_c *FieldValidator_ValidateField_Call) RunAndReturn(run func(context.Conte
 	return _c
 }
 
-// ValidatorName provides a mock function with given fields:
+// ValidatorName provides a mock function with no fields
 func (_m *FieldValidator) ValidatorName() string {
 	ret := _m.Called()
 

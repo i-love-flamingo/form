@@ -23,7 +23,7 @@ func (_m *FieldError) EXPECT() *FieldError_Expecter {
 	return &FieldError_Expecter{mock: &_m.Mock}
 }
 
-// ActualTag provides a mock function with given fields:
+// ActualTag provides a mock function with no fields
 func (_m *FieldError) ActualTag() string {
 	ret := _m.Called()
 
@@ -68,7 +68,7 @@ func (_c *FieldError_ActualTag_Call) RunAndReturn(run func() string) *FieldError
 	return _c
 }
 
-// Error provides a mock function with given fields:
+// Error provides a mock function with no fields
 func (_m *FieldError) Error() string {
 	ret := _m.Called()
 
@@ -113,7 +113,7 @@ func (_c *FieldError_Error_Call) RunAndReturn(run func() string) *FieldError_Err
 	return _c
 }
 
-// Field provides a mock function with given fields:
+// Field provides a mock function with no fields
 func (_m *FieldError) Field() string {
 	ret := _m.Called()
 
@@ -158,7 +158,7 @@ func (_c *FieldError_Field_Call) RunAndReturn(run func() string) *FieldError_Fie
 	return _c
 }
 
-// Kind provides a mock function with given fields:
+// Kind provides a mock function with no fields
 func (_m *FieldError) Kind() reflect.Kind {
 	ret := _m.Called()
 
@@ -203,7 +203,7 @@ func (_c *FieldError_Kind_Call) RunAndReturn(run func() reflect.Kind) *FieldErro
 	return _c
 }
 
-// Namespace provides a mock function with given fields:
+// Namespace provides a mock function with no fields
 func (_m *FieldError) Namespace() string {
 	ret := _m.Called()
 
@@ -248,7 +248,7 @@ func (_c *FieldError_Namespace_Call) RunAndReturn(run func() string) *FieldError
 	return _c
 }
 
-// Param provides a mock function with given fields:
+// Param provides a mock function with no fields
 func (_m *FieldError) Param() string {
 	ret := _m.Called()
 
@@ -293,7 +293,7 @@ func (_c *FieldError_Param_Call) RunAndReturn(run func() string) *FieldError_Par
 	return _c
 }
 
-// StructField provides a mock function with given fields:
+// StructField provides a mock function with no fields
 func (_m *FieldError) StructField() string {
 	ret := _m.Called()
 
@@ -338,7 +338,7 @@ func (_c *FieldError_StructField_Call) RunAndReturn(run func() string) *FieldErr
 	return _c
 }
 
-// StructNamespace provides a mock function with given fields:
+// StructNamespace provides a mock function with no fields
 func (_m *FieldError) StructNamespace() string {
 	ret := _m.Called()
 
@@ -383,7 +383,7 @@ func (_c *FieldError_StructNamespace_Call) RunAndReturn(run func() string) *Fiel
 	return _c
 }
 
-// Tag provides a mock function with given fields:
+// Tag provides a mock function with no fields
 func (_m *FieldError) Tag() string {
 	ret := _m.Called()
 
@@ -474,7 +474,7 @@ func (_c *FieldError_Translate_Call) RunAndReturn(run func(ut.Translator) string
 	return _c
 }
 
-// Type provides a mock function with given fields:
+// Type provides a mock function with no fields
 func (_m *FieldError) Type() reflect.Type {
 	ret := _m.Called()
 
@@ -521,7 +521,7 @@ func (_c *FieldError_Type_Call) RunAndReturn(run func() reflect.Type) *FieldErro
 	return _c
 }
 
-// Value provides a mock function with given fields:
+// Value provides a mock function with no fields
 func (_m *FieldError) Value() interface{} {
 	ret := _m.Called()
 
