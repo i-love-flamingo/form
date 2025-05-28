@@ -1,5 +1,11 @@
 # Changelog
 
+## Version v1.1.4 (2025-05-28)
+
+### Chores and tidying
+
+- add golangci-lint to v2 (#70) (30df0347)
+
 ## Version v1.1.3 (2025-02-17)
 
 ### Chores and tidying
