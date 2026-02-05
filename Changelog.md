@@ -1,5 +1,19 @@
 # Changelog
 
+## Version v1.1.4 (2026-02-05)
+
+### Chores and tidying
+
+- **deps:** update module flamingo.me/flamingo/v3 to v3.17.1 (#79) (cf70be1e)
+- **deps:** update golangci/golangci-lint-action action to v9 (#76) (197cc0e5)
+- **deps:** update module github.com/go-playground/validator/v10 to v10.28.0 (#67) (97e1221a)
+- **deps:** update actions/setup-go action to v6 (#75) (78765f6f)
+- **deps:** update module github.com/leebenson/conform to v1.2.3 (#72) (c3514cdb)
+- **deps:** update actions/checkout action to v5 (#73) (ac9f6445)
+- **deps:** update module flamingo.me/flamingo/v3 to v3.17.0 (#69) (3d951819)
+- **deps:** update module github.com/vektra/mockery/v2 to v2.53.5 (#61) (5cc2f9aa)
+- add golangci-lint to v2 (#70) (30df0347)
+
 ## Version v1.1.3 (2025-02-17)
 
 ### Chores and tidying
