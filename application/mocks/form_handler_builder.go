@@ -5,7 +5,6 @@ package mocks
 import (
 	application "flamingo.me/form/application"
 	domain "flamingo.me/form/domain"
-
 	mock "github.com/stretchr/testify/mock"
 )
 
