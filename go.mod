@@ -1,6 +1,6 @@
 module flamingo.me/form
 
-go 1.24.0
+go 1.26.0
 
 require (
 	flamingo.me/dingo v0.3.0
