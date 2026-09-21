@@ -1,19 +1,15 @@
-# mock might needed in all places
-testonly: false
-# for better usability of the mocks
-with-expecter: true
-# less changes in update pull requests
-disable-version-string: true
-# generate mocks in separate package
-inpackage: false
-# use original interface name as name, we use a dedicated `mocks` package to make the context clear
-mockname: "{{.InterfaceName}}"
-# snake case file names
-filename: "{{.InterfaceNameSnake}}.go"
-# place all mocks in the mocks package
-outpkg: "mocks"
+# use original interface name as name; we use a dedicated `mocks` package to make the context clear
+structname: "{{.InterfaceName}}"
+# place all mocks in the mocks package (with-expecter is always enabled in v3)
+pkgname: "mocks"
+# snake case file names, one mock per file
+filename: "{{ .InterfaceName | snakecase }}.go"
 # all mocks should live near their interfaces
 dir: "{{.InterfaceDirRelative}}/mocks"
+template: testify
+template-data:
+  # keep the v2 default explicit
+  unroll-variadic: true
 
 # mocks to generate
 packages:
