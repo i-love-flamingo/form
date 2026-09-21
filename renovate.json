@@ -4,6 +4,9 @@
     "config:base",
     ":semanticCommitTypeAll(chore)"
   ],
+  "constraints": {
+    "go": "1.26.0"
+  },
   "regexManagers": [
     {
       "description": "Update go run/go install dependencies",
