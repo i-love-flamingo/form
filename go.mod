@@ -3,7 +3,7 @@ module flamingo.me/form
 go 1.26.0
 
 require (
-	flamingo.me/dingo v0.3.0
+	flamingo.me/dingo v0.4.1
 	flamingo.me/flamingo/v3 v3.17.1
 	github.com/go-playground/form v3.1.4+incompatible
 	github.com/go-playground/universal-translator v0.18.1
@@ -59,6 +59,7 @@ require (
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.31.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
+	gonum.org/v1/gonum v0.17.0 // indirect
 	google.golang.org/api v0.152.0 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
