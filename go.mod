@@ -6,7 +6,7 @@ require (
 	flamingo.me/dingo v0.3.0
 	flamingo.me/flamingo/v3 v3.17.1
 	github.com/go-playground/form v3.1.4+incompatible
-	github.com/go-playground/universal-translator v0.18.1
+	github.com/go-playground/universal-translator v0.18.2
 	github.com/go-playground/validator/v10 v10.28.0
 	github.com/leebenson/conform v1.2.3
 	github.com/stretchr/testify v1.12.1
